@@ -31,7 +31,7 @@ npm install
 3. Run the app
 
 ```
-npm start
+npm run dev
 ```
 
 ## Example input JSON file
