@@ -28,7 +28,8 @@ type UseJsonFileConvertReturnType = {
 const useJsonFileConvert = (): UseJsonFileConvertReturnType => {
     const { processGraphData } = useProcessedGraphData();
     const { setJsonFileData, setFileName, history } = useFilesContext();
-    const { setEdges, setNodes } = useGraphStateContext();
+    const { setEdges, setNodes, setSelectedEdge, setSelectedNode } =
+        useGraphStateContext();
     const { setGraphName } = useViewStateContext();
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<object | null>(null);
@@ -47,6 +48,8 @@ const useJsonFileConvert = (): UseJsonFileConvertReturnType => {
             reader.onload = (event) => {
                 try {
                     const result = JSON.parse(event.target!.result as string);
+                    setSelectedNode(undefined);
+                    setSelectedEdge(undefined);
                     setData(result);
                     const { nodes, edges } = processGraphData(result);
                     setJsonFileData(result);
@@ -70,6 +73,8 @@ const useJsonFileConvert = (): UseJsonFileConvertReturnType => {
             setGraphName,
             setJsonFileData,
             setNodes,
+            setSelectedEdge,
+            setSelectedNode,
         ]
     );
 
@@ -102,6 +107,8 @@ const useJsonFileConvert = (): UseJsonFileConvertReturnType => {
     const openHistoryFile = (fileName: string) => {
         const file = history?.find((entry) => entry.fileName === fileName);
         setJsonFileData(file?.jsonFileData);
+        setSelectedNode(undefined);
+        setSelectedEdge(undefined);
         setFileName(file?.fileName);
         setGraphName(file?.fileName);
         const { nodes, edges } = processGraphData(file?.jsonFileData);
@@ -121,6 +128,8 @@ const useJsonFileConvert = (): UseJsonFileConvertReturnType => {
             nodes: [],
             edges: [],
         };
+        setSelectedNode(undefined);
+        setSelectedEdge(undefined);
         setGraphName(file?.name);
         const { nodes, edges } = processGraphData(data);
         setNodes(nodes);
