@@ -51,7 +51,6 @@ const NeuralNetworkGraph = () => {
     );
 
     const handleClickEdge = (_event: any, edge: Edge<any>) => {
-        console.log(edge);
         setSelectedNode(undefined);
         setSelectedEdge(edge);
     };
