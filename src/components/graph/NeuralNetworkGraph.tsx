@@ -12,7 +12,6 @@ import { useGraphStateContext } from "@/contexts/graphContext";
 import { CircularProgress } from "@mui/material";
 import { useDrawerStateContext } from "@/contexts/drawerContext";
 import { createNodeComponent } from "./nodes/createNodeComponent";
-import { IGraphNode } from "@/models/models";
 
 const nodeTypes = {
     Input: createNodeComponent("Input"),

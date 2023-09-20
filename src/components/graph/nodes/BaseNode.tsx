@@ -17,6 +17,9 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
     additionalInformation,
     style,
 }) => {
+    const { selectedNode } = useGraphStateContext();
+    const isSelected = String(selectedNode?.id) === String(data.id);
+
     return (
         <Tooltip
             title={<NodeTooltip selectedNode={data} />}
@@ -34,10 +37,11 @@ export const BaseNode: React.FC<BaseNodeProps> = ({
         >
             <Box
                 sx={{
-                    border: "1px solid black",
+                    border: isSelected ? "5px solid black" : "1px solid grey",
                     overflow: "hidden",
                     background: "grey",
                     position: "relative",
+                    transition: "all 0.05s ease-in-out",
                     ...style,
                 }}
             >
