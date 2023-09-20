@@ -140,9 +140,16 @@ export default function DrawerContent() {
             </DrawerHeader>
             {isMobile && <Divider />}
             <DrawerList listItems={mainMenuListItems} title={"main menu"} />
-            <Divider sx={!open ? { py: 0.4 } : { py: 0.4, mb: 0.8 }} />
-            <DrawerList listItems={networkListItems} title={"architectures"} />
-            {jsonFileHistoryListItems.length > 0 && (
+            {open && (
+                <React.Fragment>
+                    <Divider sx={!open ? { py: 0.4 } : { py: 0.4, mb: 0.8 }} />
+                    <DrawerList
+                        listItems={networkListItems}
+                        title={"architectures"}
+                    />
+                </React.Fragment>
+            )}
+            {jsonFileHistoryListItems.length > 0 && open && (
                 <React.Fragment>
                     <Divider sx={!open ? { py: 0.4 } : { py: 0.4, mb: 0.8 }} />
                     <DrawerList
